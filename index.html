@@ -6,76 +6,48 @@
   <title>Frauen im geteilten Deutschland — Audioguide-Menü</title>
   <style>
     :root{
-      --bg: #0e1117;
-      --card: #12161f;
-      --text: #e6edf3;
-      --muted: #9aa7b2;
-      --accent: #1f6f3d;
-      --accent-press: #185833;
-      --accent-glow: rgba(31,111,61,.35);
-      --shadow: rgba(0,0,0,.35);
-      --chip: #202634;
+      --bg:#0e1117; --card:#12161f; --text:#e6edf3; --muted:#9aa7b2;
+      --accent:#1f6f3d; --accent-press:#185833; --accent-glow:rgba(31,111,61,.35);
+      --chip:#202634; --shadow:rgba(0,0,0,.35);
     }
-    html, body { height: 100%; }
-    body{
-      margin:0; font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text); background: var(--bg);
-      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-    }
-    .container{ max-width: 920px; margin: 0 auto; padding: 16px; }
+    html,body{height:100%}
+    body{margin:0; font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text); background:var(--bg)}
+    .container{max-width:920px; margin:0 auto; padding:16px}
 
-    header{
-      position: sticky; top: 0; z-index: 5;
-      backdrop-filter: saturate(140%) blur(8px);
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
-      border-bottom: 1px solid rgba(255,255,255,.06);
-    }
-    .hero{
-      position: relative;
-      background: linear-gradient(180deg, color-mix(in srgb, var(--card) 90%, transparent) 0%, transparent 100%);
-      border-radius: 20px; padding: 22px 20px 28px; box-shadow: 0 10px 30px var(--shadow) inset;
-    }
-    h1{ margin:0; font-weight: 900; letter-spacing:.2px; font-size: clamp(24px, 4.2vw, 38px); }
-    .subtitle{ margin-top: 6px; color: var(--muted); font-weight: 700; font-size: clamp(14px, 2.3vw, 18px); }
-    .hint{ margin-top: 10px; color: var(--muted); font-weight: 600; font-size: 15px; }
+    /* Закреплённая шапка */
+    header{position:sticky; top:0; z-index:5; backdrop-filter:saturate(140%) blur(8px);
+      background:color-mix(in srgb, var(--bg) 80%, transparent); border-bottom:1px solid rgba(255,255,255,.06)}
+    .hero{position:relative; background:linear-gradient(180deg, color-mix(in srgb, var(--card) 90%, transparent) 0%, transparent 100%);
+      border-radius:20px; padding:22px 20px 18px; box-shadow:0 10px 30px var(--shadow) inset}
+    h1{margin:0; font-weight:900; letter-spacing:.2px; font-size:clamp(24px,4.2vw,38px)}
+    .subtitle{margin-top:6px; color:var(--muted); font-weight:700; font-size:clamp(14px,2.3vw,18px)}
+    .hint{margin-top:10px; color:var(--muted); font-weight:600; font-size:15px}
 
-    .lang{
-      position: absolute; right: 12px; top: 12px; display: inline-flex; align-items: center;
-    }
-    .lang button{
-      appearance: none; -webkit-tap-highlight-color: transparent; cursor: pointer;
-      border: 1px solid rgba(255,255,255,.08); background: var(--chip); color: #fff;
-      padding: 10px 14px; border-radius: 999px; font-weight: 800; letter-spacing:.5px;
-      box-shadow: 0 8px 18px rgba(0,0,0,.25);
-      transition: transform .08s ease, box-shadow .2s ease, background .08s ease;
-    }
-    .lang button:active{ transform: translateY(1px) scale(.98); box-shadow: 0 4px 10px rgba(0,0,0,.35); }
+    /* Переключатель языка */
+    .lang{position:absolute; right:12px; top:12px}
+    .lang button{appearance:none; cursor:pointer; border:1px solid rgba(255,255,255,.08); background:var(--chip); color:#fff;
+      padding:10px 14px; border-radius:999px; font-weight:800; letter-spacing:.5px; box-shadow:0 8px 18px rgba(0,0,0,.25);
+      transition:transform .08s ease, box-shadow .2s ease, background .08s ease}
+    .lang button:active{transform:translateY(1px) scale(.98); box-shadow:0 4px 10px rgba(0,0,0,.35)}
 
-    .grid{
-      margin: 20px auto 28px; display: grid; gap: 16px;
-      grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
-    }
-    .pill{
-      appearance: none; cursor: pointer;
-      background: var(--accent); color: #fff; border: none; border-radius: 999px;
-      padding: 20px 22px; font-weight: 800; font-size: 22px; letter-spacing:.3px;
-      box-shadow: 0 10px 26px var(--accent-glow), 0 2px 6px rgba(0,0,0,.25);
-      transition: transform .08s ease, box-shadow .2s ease, background .08s ease;
-      touch-action: manipulation; user-select: none;
-    }
-    .pill:active{ transform: translateY(1px) scale(.99); background: var(--accent-press); }
+    /* Сетка кнопок */
+    .grid{margin:20px auto 28px; display:grid; gap:16px; grid-template-columns:repeat(auto-fill, minmax(128px,1fr))}
+    .pill{appearance:none; cursor:pointer; background:var(--accent); color:#fff; border:none; border-radius:999px;
+      padding:20px 22px; font-weight:800; font-size:22px; letter-spacing:.3px;
+      box-shadow:0 10px 26px var(--accent-glow), 0 2px 6px rgba(0,0,0,.25);
+      transition:transform .08s ease, box-shadow .2s ease, background .08s ease; touch-action:manipulation; user-select:none}
+    .pill:focus-visible{outline:3px solid color-mix(in srgb, var(--accent) 60%, white 40%); outline-offset:2px}
+    .pill:active{transform:translateY(1px) scale(.99); background:var(--accent-press)}
 
-    footer{ color: var(--muted); text-align:center; padding: 24px 0 40px; font-size: 14px; }
-
+    footer{color:var(--muted); text-align:center; padding:24px 0 40px; font-size:14px}
+    @media (max-width:380px){ .grid{grid-template-columns:repeat(2,1fr)} .pill{padding:22px 24px; font-size:24px} }
   </style>
 </head>
 <body>
   <header>
     <div class="container">
       <div class="hero">
-        <div class="lang">
-          <button id="langBtn" aria-label="Sprache umschalten">DE</button>
-        </div>
+        <div class="lang"><button id="langBtn" aria-label="Sprache umschalten">DE</button></div>
         <h1 id="title">Frauen im geteilten Deutschland</h1>
         <div id="subtitle" class="subtitle">Eine Ausstellung der Bundesstiftung zur Aufarbeitung der SED-Diktatur von Clara Marz</div>
         <div id="hint" class="hint">Diese Nummern (2–20) finden Sie im unteren Bereich jeder Texttafel.</div>
@@ -88,32 +60,49 @@
   </main>
 
   <footer>
-    
+    Scrollen, um alle Nummern (2–20) zu sehen. Tippen — später fügen wir weitere Stationen hinzu.
   </footer>
 
   <script>
+    // Двухъязычные тексты шапки
     const i18n = {
       de: {
         title: 'Frauen im geteilten Deutschland',
         subtitle: 'Eine Ausstellung der Bundesstiftung zur Aufarbeitung der SED-Diktatur von Clara Marz',
         hint: 'Diese Nummern (2–20) finden Sie im unteren Bereich jeder Texttafel.',
-        code: 'DE', aria: i=>`Station Nummer ${i}`, toast: i=>`Knopf gedrückt №${i}.`
+        code: 'DE',
+        aria: (i)=>`Station Nummer ${i}`,
+        na: (i)=>`Station ${i} ist noch nicht verfügbar.`
       },
       en: {
         title: 'Women in Divided Germany',
         subtitle: 'An exhibition produced by Clara Marz for the Federal Foundation for the Study of the Communist Dictatorship in Germany',
         hint: 'You will find these numbers (2–20) in the lower part of each text panel.',
-        code: 'EN', aria: i=>`Station number ${i}`, toast: i=>`Pressed button #${i}.`
+        code: 'EN',
+        aria: (i)=>`Station number ${i}`,
+        na: (i)=>`Station ${i} is not yet available.`
       }
     };
 
+    // Запоминаем язык
     const langKey = 'guide_lang';
     let lang = localStorage.getItem(langKey) || 'de';
+
+    // Узлы
     const titleEl = document.getElementById('title');
     const subtitleEl = document.getElementById('subtitle');
     const hintEl = document.getElementById('hint');
     const langBtn = document.getElementById('langBtn');
     const buttonsWrap = document.getElementById('buttons');
+
+    // === ССЫЛКИ НА ГОТОВЫЕ СТАНЦИИ (добавляй по мере публикации) ===
+    const stationLinks = {
+      2: 'https://ausstellungmw.github.io/FiD02/'
+      // 3: 'https://ausstellungmw.github.io/FiD03/',
+      // 4: 'https://ausstellungmw.github.io/FiD04/',
+      // ...
+      // 20: 'https://ausstellungmw.github.io/FiD20/'
+    };
 
     function applyLang(){
       const t = i18n[lang];
@@ -122,8 +111,10 @@
       subtitleEl.textContent = t.subtitle;
       hintEl.textContent = t.hint;
       langBtn.textContent = t.code;
+
+      // Обновим aria-label у уже созданных кнопок
       [...buttonsWrap.children].forEach((btn, idx)=>{
-        const num = idx + 2;
+        const num = idx + 2; // 2..20
         btn.setAttribute('aria-label', t.aria(num));
       });
     }
@@ -134,20 +125,27 @@
       applyLang();
     });
 
-    for (let i = 2; i <= 20; i++) {
+    // Сгенерировать кнопки 2..20
+    for(let i=2; i<=20; i++){
       const btn = document.createElement('button');
       btn.className = 'pill';
       btn.type = 'button';
       btn.textContent = i.toString();
       btn.setAttribute('aria-label', i18n[lang].aria(i));
-      btn.addEventListener('click', () => {
-        toast(i18n[lang].toast(i));
+      btn.addEventListener('click', ()=>{
+        const link = stationLinks[i];
+        if(link){
+          window.location.href = link;     // переход на опубликованную станцию
+        }else{
+          toast(i18n[lang].na(i));         // вежливая заглушка
+        }
       });
       buttonsWrap.appendChild(btn);
     }
 
     applyLang();
 
+    // Мини-тост
     function toast(text){
       const t = document.createElement('div');
       t.textContent = text;
@@ -155,10 +153,11 @@
         position:'fixed', left:'50%', bottom:'22px', transform:'translateX(-50%)',
         background:'rgba(18,22,31,.96)', color:'#fff', padding:'10px 14px',
         borderRadius:'12px', boxShadow:'0 10px 25px rgba(0,0,0,.4)', zIndex:1000,
-        fontWeight:'600', letterSpacing:'.2px', fontSize:'14px',
+        fontWeight:'600', letterSpacing:'.2px', fontSize:'14px'
       });
       document.body.appendChild(t);
-      setTimeout(()=>{ t.style.transition = 'opacity .35s ease, transform .35s ease'; t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(6px)'; }, 1200);
+      setTimeout(()=>{ t.style.transition='opacity .35s ease, transform .35s ease';
+        t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(6px)'; }, 1200);
       setTimeout(()=> t.remove(), 1600);
     }
   </script>
