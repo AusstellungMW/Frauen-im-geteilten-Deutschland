@@ -55,6 +55,9 @@
     /* Отступ ниже шапки для будущего блока */
     .spacer{ height: 20px; }
 
+    /* Пояснительный текст перед кнопками */
+    .hint{ color: var(--muted); font-weight: 600; margin: 6px 0 14px; }
+
     /* Список кнопок */
     .grid{
       margin: 10px auto 28px; display: grid; gap: 16px;
@@ -98,6 +101,9 @@
   <div class="spacer"></div>
 
   <main class="container" id="app">
+    <!-- Пояснение для посетителя перед кнопками -->
+    <p id="hint" class="hint">Diese Nummern (2–20) finden Sie im unteren Bereich jeder Texttafel.</p>
+
     <section aria-label="Станции аудиогида" class="grid" id="buttons"></section>
   </main>
 
@@ -111,12 +117,18 @@
       de: {
         title: 'Frauen im geteilten Deutschland',
         subtitle: 'Eine Ausstellung der Bundesstiftung zur Aufarbeitung der SED-Diktatur von Clara Marz',
-        code: 'DE'
+        hint: 'Diese Nummern (2–20) finden Sie im unteren Bereich jeder Texttafel.',
+        code: 'DE',
+        aria: (i)=>`Station Nummer ${i}`,
+        toast: (i)=>`Knopf gedrückt №${i}.`
       },
       en: {
         title: 'Women in Divided Germany',
         subtitle: 'An exhibition produced by Clara Marz for the Federal Foundation for the Study of the Communist Dictatorship in Germany',
-        code: 'EN'
+        hint: 'You will find these numbers (2–20) in the lower part of each text panel.',
+        code: 'EN',
+        aria: (i)=>`Station number ${i}`,
+        toast: (i)=>`Pressed button #${i}.`
       }
     };
 
@@ -126,14 +138,22 @@
 
     const titleEl = document.getElementById('title');
     const subtitleEl = document.getElementById('subtitle');
+    const hintEl = document.getElementById('hint');
     const langBtn = document.getElementById('langBtn');
+    const buttonsWrap = document.getElementById('buttons');
 
     function applyLang(){
       const t = i18n[lang];
       document.documentElement.lang = lang;
       titleEl.textContent = t.title;
       subtitleEl.textContent = t.subtitle;
+      hintEl.textContent = t.hint;
       langBtn.textContent = t.code; // на кнопке отображаем текущий язык
+      // обновляем aria-label у уже созданных кнопок
+      [...buttonsWrap.children].forEach((btn, idx)=>{
+        const num = idx + 2; // начинаем с 2
+        btn.setAttribute('aria-label', t.aria(num));
+      });
     }
 
     langBtn.addEventListener('click', ()=>{
@@ -142,22 +162,21 @@
       applyLang();
     });
 
-    applyLang();
-
     // Генерация кнопок 2..20 (крупнее, цифра по центру)
-    const buttonsWrap = document.getElementById('buttons');
     for (let i = 2; i <= 20; i++) {
       const btn = document.createElement('button');
       btn.className = 'pill';
       btn.type = 'button';
       btn.textContent = i.toString();
-      btn.setAttribute('aria-label', (lang==='de' ? 'Station Nummer ' : 'Station number ') + i);
+      btn.setAttribute('aria-label', i18n[lang].aria(i));
       btn.addEventListener('click', () => {
-        toast((lang==='de' ? 'Knopf gedrückt №' : 'Pressed button #') + i + '.');
+        toast(i18n[lang].toast(i));
         // TODO: location.href = `station-${i}.html`;
       });
       buttonsWrap.appendChild(btn);
     }
+
+    applyLang();
 
     // Мини-тост без библиотек
     function toast(text){
@@ -176,3 +195,4 @@
   </script>
 </body>
 </html>
+
