@@ -47,7 +47,7 @@
   <header>
     <div class="container">
       <div class="hero">
-        <div class="lang"><button id="langBtn" aria-label="Sprache umschalten">DE</button></div>
+        <div class="lang"><button id="langBtn" aria-label="Sprache umschalten">EN</button></div>
         <h1 id="title">Frauen im geteilten Deutschland</h1>
         <div id="subtitle" class="subtitle">Eine Ausstellung der Bundesstiftung zur Aufarbeitung der SED-Diktatur von Clara Marz</div>
         <div id="hint" class="hint">Diese Nummern (2–20) finden Sie im unteren Bereich jeder Texttafel.</div>
@@ -60,7 +60,7 @@
   </main>
 
   <footer>
-    
+    <!-- можно оставить пустым или добавить копирайт -->
   </footer>
 
   <script>
@@ -70,7 +70,7 @@
         title: 'Frauen im geteilten Deutschland',
         subtitle: 'Eine Ausstellung der Bundesstiftung zur Aufarbeitung der SED-Diktatur von Clara Marz',
         hint: 'Diese Nummern (2–20) finden Sie im unteren Bereich jeder Texttafel.',
-        code: 'DE',
+        codeOpp: 'EN', // показываем противоположный язык
         aria: (i)=>`Station Nummer ${i}`,
         na: (i)=>`Station ${i} ist noch nicht verfügbar.`
       },
@@ -78,7 +78,7 @@
         title: 'Women in Divided Germany',
         subtitle: 'An exhibition produced by Clara Marz for the Federal Foundation for the Study of the Communist Dictatorship in Germany',
         hint: 'You will find these numbers (2–20) in the lower part of each text panel.',
-        code: 'EN',
+        codeOpp: 'DE', // показываем противоположный язык
         aria: (i)=>`Station number ${i}`,
         na: (i)=>`Station ${i} is not yet available.`
       }
@@ -95,13 +95,27 @@
     const langBtn = document.getElementById('langBtn');
     const buttonsWrap = document.getElementById('buttons');
 
-    // === ССЫЛКИ НА ГОТОВЫЕ СТАНЦИИ (добавляй по мере публикации) ===
+    // === ССЫЛКИ НА ГОТОВЫЕ СТАНЦИИ (2..20) ===
     const stationLinks = {
-      2: 'https://ausstellungmw.github.io/FiD02/'
-      //3: 'https://ausstellungmw.github.io/FiD03/',
-      //4: 'https://ausstellungmw.github.io/FiD04/',
-      // ...
-      // 20: 'https://ausstellungmw.github.io/FiD20/'
+      2: 'https://ausstellungmw.github.io/FiD02/',
+      3: 'https://ausstellungmw.github.io/FiD03/',
+      4: 'https://ausstellungmw.github.io/FiD04/',
+      5: 'https://ausstellungmw.github.io/FiD05/',
+      6: 'https://ausstellungmw.github.io/FiD06/',
+      7: 'https://ausstellungmw.github.io/FiD07/',
+      8: 'https://ausstellungmw.github.io/FiD08/',
+      9: 'https://ausstellungmw.github.io/FiD09/',
+      10: 'https://ausstellungmw.github.io/FiD10/',
+      11: 'https://ausstellungmw.github.io/FiD11/',
+      12: 'https://ausstellungmw.github.io/FiD12/',
+      13: 'https://ausstellungmw.github.io/FiD13/',
+      14: 'https://ausstellungmw.github.io/FiD14/',
+      15: 'https://ausstellungmw.github.io/FiD15/',
+      16: 'https://ausstellungmw.github.io/FiD16/',
+      17: 'https://ausstellungmw.github.io/FiD17/',
+      18: 'https://ausstellungmw.github.io/FiD18/',
+      19: 'https://ausstellungmw.github.io/FiD19/',
+      20: 'https://ausstellungmw.github.io/FiD20/'
     };
 
     function applyLang(){
@@ -110,7 +124,7 @@
       titleEl.textContent = t.title;
       subtitleEl.textContent = t.subtitle;
       hintEl.textContent = t.hint;
-      langBtn.textContent = t.code;
+      langBtn.textContent = t.codeOpp; // показываем противоположный код языка на кнопке
 
       // Обновим aria-label у уже созданных кнопок
       [...buttonsWrap.children].forEach((btn, idx)=>{
